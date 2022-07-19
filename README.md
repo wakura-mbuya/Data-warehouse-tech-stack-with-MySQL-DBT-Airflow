@@ -1,1 +1,2 @@
 # Data-warehouse-tech-stack-with-MySQL-DBT-Airflow
+The objective of the project is to develop a scalable data warehouse that will host the vehicle trajectory data extracted by analysing footage taken by swarm drones and static roadside cameras.The data warehouse should take into account future needs, organise data such that a number of downstream projects query the data efficiently. You should use the Extract Load Transform (ELT) framework using DBT.   
