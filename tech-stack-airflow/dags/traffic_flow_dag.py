@@ -1,16 +1,31 @@
-import airflow
-from airflow import DAG
-from datetime import datetime
+from datetime import datetime, timedelta
 
-#Create and instance of a DAG class
+from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.bash import BashOperator
+from airflow.utils.dates import days_ago
+
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
 with DAG(
-    dag_id="traffic_flow_dag",
-    schedule_interval="@daily", 
-    start_date=airflow.utils.dates.days_ago(1),
-    catchup=False,
+    'traffic_flow',
+    default_args=default_args,
+    description='Schedule Traffic Flow Ingestion',
+    schedule_interval="@daily",
+    start_date=days_ago(1),
+    catchup=False
 ) as dag:
 
-
-
-
-#implementing the tasks
+    t1 = BashOperator(
+        task_id='import_traffic_flow_to_csv',
+        bash_command='python /opt/airflow/dags/extract_data.py --date {{ ds }}'
+    )
+    t2 = BashOperator(
+        task_id='export_data_to_db',
+        bash_command='python /opt/airflow/dags/traffic_csv_to_db.py '
+                     '--date {{ ds }} --connection %s' % Variable.get("data_dev_connection")
+    )

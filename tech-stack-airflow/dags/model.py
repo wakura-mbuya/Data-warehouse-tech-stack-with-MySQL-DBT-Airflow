@@ -15,7 +15,7 @@ class Connection(object):
         The constructor for the Connection class. 
         It creates an SQLAlchemy database Engine to map Python models to PPostgreSQL database
         Params:
-            db_connection => str
+            db_connection: str
                 Database connection string
         """
         engine = create_engine(db_connection)
