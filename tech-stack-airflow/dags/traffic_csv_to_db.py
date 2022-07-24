@@ -35,7 +35,7 @@ def main(fetch_date, db_connection):
     with open(filename, encoding='utf-8') as csvf:
         csv_reader = csv.DictReader(csvf)
         for row in csv_reader:
-            traffic_data = TrafficFlow(id=row['id'],
+            traffic_data = TrafficFlow(
                                 track_id=row['track_id'],
                                 vehicle_types=row['vehicle_types'],
                                 traveled_d=row['traveled_d'],

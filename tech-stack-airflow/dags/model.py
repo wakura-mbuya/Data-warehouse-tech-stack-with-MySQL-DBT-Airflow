@@ -40,7 +40,7 @@ Base = declarative_base()
 
 
 def init_db(db_connection):
-    engine = create_engine(db_connection)
+    engine = create_engine(db_connection, max_overflow=-1)
     Base.metadata.create_all(bind=engine)
 
 class TrafficFlow(Base):
@@ -56,12 +56,11 @@ class TrafficFlow(Base):
     avg_speed = Column(Float)
     trajectory = Column(String)
 
-    def __init__(self, id, track_id, vehicle_types, traveled_d, avg_speed, trajectory):
+    def __init__(self, track_id, vehicle_types, traveled_d, avg_speed, trajectory):
         """
         Constructor to the TrafficFlow class
         It initializes all the properties of the class
         """
-        self.id = id
         self.track_id = track_id
         self.vehicle_types = vehicle_types
         self.traveled_d = traveled_d
