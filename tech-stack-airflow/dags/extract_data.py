@@ -43,10 +43,10 @@ def get_file_path(fetch_date):
     """
     This function constructs a filename to be used 
     Params:
-        fetch_date => str
+        fetch_date: str
             The date the data was downloaded from the pNeuma API
     Returns:
-        filepath => os.Path
+        filepath: os.Path
             The path to the file
     """
     filename = "traffic_flow_{}.csv".format(fetch_date)
@@ -57,7 +57,7 @@ def save(data_to_append,fetch_date):
     """
     This function saves the data to a csv file
     Params:
-        data_to_append => pd.DataFrame
+        data_to_append: pd.DataFrame
             A pandas DataFrame containing the data to be saved to the csv
         fetch_date => str
             The date the data was downloaded. This is used to create the filepath
@@ -72,7 +72,7 @@ def main(filename, fetch_date):
     Params:
         filename => str
             The name of the file containing the raw data
-        fetch_date => str
+        fetch_date: str
             The date the data was downloaded from the web
     """
     data_to_append = transform_raw_data(filename)
