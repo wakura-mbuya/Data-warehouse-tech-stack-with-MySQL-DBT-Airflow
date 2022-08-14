@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath("includes/python"))
 
 from extract_data import Extractor
 from loader import Loader
-DBT_PROJECT_DIR = "~/<dbt-folder-name>"
-DBT_PROFILE_DIR = " ~/<dbt-folder-name>/.dbt"
+DBT_PROJECT_DIR = "~/dbt_"
+DBT_PROFILE_DIR = " ~/dbt_/.dbt"
 extract = Extractor()
 loader = Loader()
 
@@ -54,14 +54,14 @@ with DAG(dag_id="workflow",default_args=default_args,schedule_interval='@daily',
         )
     dbt_run = BashOperator(
         task_id="dbt_run",
-        bash_command=f"cd ~/<dbt-project-name> ~/. && local/dbt run --profiles-dir {DBT_PROFILE_DIR}"
-    )    
+        bash_command=f"cd ~/dbt_ && ~/.local/bin/dbt run --profiles-dir {DBT_PROFILE_DIR}",
+    )
     dbt_test = BashOperator(
         task_id="dbt_test",
-        bash_command=f"cd ~/OneDrive/Documents/GitHub/Data-warehouse-tech-stack-with-posgreSQL-DBT-Airflow/dbt_/traffic_flow dbt run --profiles-dir {DBT_PROFILE_DIR}",
+        bash_command=f"cd ~/dbt_ && ~/.local/bin/dbt test --profiles-dir {DBT_PROFILE_DIR}",
     )
     dbt_doc = BashOperator(
         task_id="dbt_doc",
-        bash_command=f"cd ~/dbt_/traffic_flow && ~/.local/bin/traffic_flow docs generate --profiles-dir {DBT_PROFILE_DIR} && ~/.local/bin/traffic_flow docs serve --port 7211 --profiles-dir {DBT_PROFILE_DIR}",
+        bash_command=f"cd ~/dbt_ && ~/.local/bin/dbt docs generate --profiles-dir {DBT_PROFILE_DIR} && ~/.local/bin/dbt docs serve --port 7211 --profiles-dir {DBT_PROFILE_DIR}",
     )
 extract_task >> load_task >> dbt_run >> dbt_test >> dbt_doc
