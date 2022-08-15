@@ -54,7 +54,7 @@ with DAG(dag_id="workflow",default_args=default_args,schedule_interval='@daily',
         )
     dbt_run = BashOperator(
         task_id="dbt_run",
-        bash_command=f"cd ~/dbt_ && ~/.local/bin/dbt run --profiles-dir {DBT_PROFILE_DIR}",
+        bash_command=f"cd ~/dbt_ && ~/.local/bin/dbt debug --profiles-dir {DBT_PROFILE_DIR}",
     )
     dbt_test = BashOperator(
         task_id="dbt_test",

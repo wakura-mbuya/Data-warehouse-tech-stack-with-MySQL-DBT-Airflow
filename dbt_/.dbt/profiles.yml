@@ -4,7 +4,7 @@ dbt_:
     dev:
       type: postgres
       threads: 1
-      host: postgres
+      host: localhost
       port: 5432
       user: warehouse
       pass: warehouse
@@ -13,12 +13,12 @@ dbt_:
 
     prod:
       type: postgres
-      threads: 1
-      host: postgres
-      port: 5432
-      user: warehouse
-      pass: warehouse
-      dbname: warehouse
-      schema: warehouse
+      threads: [1 or more]
+      host: [host]
+      port: [port]
+      user: [prod_username]
+      pass: [prod_password]
+      dbname: [dbname]
+      schema: [prod_schema]
 
   target: dev
