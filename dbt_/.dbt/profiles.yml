@@ -1,4 +1,4 @@
-traffic_flow:
+dbt_:
   outputs:
 
     dev:
@@ -13,11 +13,12 @@ traffic_flow:
 
     prod:
       type: postgres
-      threads: 1
-      host: postgres
-      port: 5432
-      user: warehouse
-      pass: warehouse
-      dbname: warehouse
-      schema: warehouse
+      threads: [1 or more]
+      host: [host]
+      port: [port]
+      user: [prod_username]
+      pass: [prod_password]
+      dbname: [dbname]
+      schema: [prod_schema]
+
   target: dev
